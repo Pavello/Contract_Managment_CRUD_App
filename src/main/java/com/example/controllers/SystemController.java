@@ -5,12 +5,14 @@ import com.example.model.Contract;
 import com.example.model.System;
 import com.example.repository.SystemRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 
 @Controller
@@ -32,14 +34,19 @@ public class SystemController {
     }
 
     @RequestMapping(value = "/addSystem", method = RequestMethod.POST)
-    public String addNewSystem(@RequestParam(name ="name") String name,
-                                 @RequestParam(name ="description") String description,
-                                 @RequestParam(name ="technologies") String technologies,
-                                 Model model) {
+    public String addNewSystem( @RequestParam(name ="name") String name,
+                                @RequestParam(name ="description") String description,
+                                @RequestParam(name ="technologies") String technologies,
+                                Model model,
+                                RedirectAttributes redirectAttr) {
 
-        System systemToAdd = new System(name, description, technologies);
-        systemRepository.save(systemToAdd);
-
+        if(systemRepository.findByName(name) == null){
+            System systemToAdd = new System(name, description, technologies);
+            systemRepository.save(systemToAdd);
+            redirectAttr.addFlashAttribute("SystemMessage", "System added properly!");
+        }else{
+            redirectAttr.addFlashAttribute("SystemMessage", "System name already exist! Try again");
+        }
         return "redirect:/addNewSystemForm";
     }
 }

@@ -10,7 +10,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 
 import java.util.Date;
@@ -59,30 +59,35 @@ public class ContractController {
                                 @RequestParam(name ="settlement") String settlement,
                                 @RequestParam(name ="payment") double payment,
                                 @RequestParam(name ="systemName") String systemName,
-                                Model model) {
+                                Model model,
+                                RedirectAttributes redirectAttr) {
 
-        System systemToCheck = systemRepository.findByName(systemName);
-        if(systemToCheck != null && systemToCheck.getContract() == null){
-                Contract contractToAdd = new Contract(number, startDate, endDate, Settlement.valueOf(settlement.toUpperCase()), payment, true);
-                contractToAdd.setSystem(systemToCheck);
-                contractRepository.save(contractToAdd);
+        System systemToAssignContract = systemRepository.findByName(systemName);
+        if(systemToAssignContract != null && systemToAssignContract.getContract() == null){
+            Contract contractToAdd = new Contract(number, startDate, endDate, Settlement.valueOf(settlement.toUpperCase()), payment, true);
+            contractToAdd.setSystem(systemToAssignContract);
+            contractRepository.save(contractToAdd);
+            redirectAttr.addFlashAttribute("contractMessage", "Contract added properly!");
+        }else{
+            redirectAttr.addFlashAttribute("contractMessage", "This system does not exist or it has already a contract assigned! Try with another one");
         }
 
         return "redirect:/addNewContractForm";
     }
 
     @RequestMapping(value = "/removeContract", method = RequestMethod.POST)
-    public String removeContract(@RequestParam("id") Long id, Model model){
+    public String removeContract(@RequestParam("number") String number, Model model, RedirectAttributes redirectAttr){
 
-        Contract contractToRemove = isPresentById(id);
+        Contract contractToRemove = contractRepository.findByNumber(number);
         if (contractToRemove != null){
             contractToRemove.setStatus(false);
             contractRepository.save(contractToRemove);
-            return "redirect:/dataService";
+            redirectAttr.addFlashAttribute("removeContractMessage","Contract deactivated properly!");
         }
         else{
-            return "redirect:/removeContractForm";
+            redirectAttr.addFlashAttribute("removeContractMessage","There is no Contract with such name in database");
         }
+        return "redirect:/removeContractForm";
     }
 
     @RequestMapping(value = "/editContracts", method = RequestMethod.POST)

@@ -7,6 +7,11 @@ import org.springframework.web.bind.annotation.GetMapping;
 @Controller
 public class MenuController {
 
+    @GetMapping("/home")
+    public String viewHomePageFromMenu(Model model) {
+        return "home";
+    }
+
     @GetMapping("/viewData")
     public String viewDataPage(Model model) {
         return "viewData";
@@ -17,9 +22,11 @@ public class MenuController {
         return "dataService";
     }
 
-    @GetMapping("/home")
-    public String viewHomePageFromMenu(Model model) {
-        return "home";
-}
+    @GetMapping("/about")
+    public String viewAbout(Model model) {
+        return "about";
+    }
+
+
 }
 

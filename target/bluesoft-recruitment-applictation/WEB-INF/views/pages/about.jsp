@@ -6,11 +6,9 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<html>
-<head>
-    <title>about</title>
-</head>
-<body>
-
-</body>
-</html>
+<div class="jumbotron">
+    <h1 class="display-4">Hello everyone!</h1>
+    <p class="lead">Author of application: Pawel Kania</p>
+    <hr class="my-4">
+    <p>The application was made on 2019.10.15</p>
+</div>

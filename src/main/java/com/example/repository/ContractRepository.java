@@ -11,4 +11,5 @@ import java.util.List;
 public interface ContractRepository extends JpaRepository<Contract, Long> {
 
     List<Contract> findByStatusIsTrue();
+    Contract findByNumber(String number);
 }
