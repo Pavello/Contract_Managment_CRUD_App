@@ -1,0 +1,20 @@
+
+#nav{
+    list-style: none;
+    position: fixed;
+    margin-top: -10px;
+    width: 100%;
+    font-family: Product Sans;
+    font-size: 0;
+    text-align:center;
+    padding-left:0px;
+}
+#nav li{
+    width: 200px;
+    height: 50px;
+    display: inline-block;
+    text-align: center;
+    padding-top: 5px;
+    background-color: white;
+    font-size: 30px;
+}

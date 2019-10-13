@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE tiles-definitions PUBLIC
+        "-//Apache Software Foundation//DTD Tiles Configuration 2.0//EN"
+        "http://tiles.apache.org/dtds/tiles-config_2_0.dtd">
+<tiles-definitions>
+    <definition name="base.definition"
+                template="/WEB-INF/views/tiles/layouts/defaultLayout.jsp">
+        <put-attribute name="title" value="" />
+        <put-attribute name="header" value="/WEB-INF/views/tiles/templates/defaultHeader.jsp" />
+        <put-attribute name="menu" value="" />
+        <put-attribute name="body" value=""/>
+    </definition>
+
+    <definition name="home" extends="base.definition">
+        <put-attribute name="title" value="BlueSoft Recruitment App" />
+        <put-attribute name="menu" value="/WEB-INF/views/pages/home.jsp" />
+    </definition>
+
+    <definition name="viewData" extends="base.definition">
+        <put-attribute name="title" value="BlueSoft Recruitment App" />
+        <put-attribute name="menu" value="/WEB-INF/views/pages/DisplayData/viewDataPage.jsp" />
+    </definition>
+
+    <definition name="dataService" extends="base.definition">
+        <put-attribute name="title" value="BlueSoft Recruitment App" />
+        <put-attribute name="menu" value="/WEB-INF/views/pages/ManipulateData/dataService.jsp" />
+    </definition>
+
+    <definition name="allContracts" extends="base.definition">
+        <put-attribute name="title" value="BlueSoft Recruitment App" />
+        <put-attribute name="body" value="/WEB-INF/views/pages/DisplayData/allContracts.jsp" />
+        <put-attribute name="menu" value="/WEB-INF/views/pages/DisplayData/viewDataPage.jsp" />
+    </definition>
+
+    <definition name="activeContracts" extends="base.definition">
+        <put-attribute name="title" value="BlueSoft Recruitment App" />
+        <put-attribute name="body" value="/WEB-INF/views/pages/DisplayData/activeContracts.jsp" />
+        <put-attribute name="menu" value="/WEB-INF/views/pages/DisplayData/viewDataPage.jsp" />
+    </definition>
+
+    <definition name="systems" extends="base.definition">
+        <put-attribute name="title" value="BlueSoft Recruitment App" />
+        <put-attribute name="body" value="/WEB-INF/views/pages/DisplayData/systems.jsp" />
+        <put-attribute name="menu" value="/WEB-INF/views/pages/DisplayData/viewDataPage.jsp" />
+    </definition>
+
+    <definition name="removeContractForm" extends="base.definition">
+        <put-attribute name="title" value="BlueSoft Recruitment App" />
+        <put-attribute name="body" value="/WEB-INF/views/pages/ManipulateData/removeContractForm.jsp" />
+        <put-attribute name="menu" value="/WEB-INF/views/pages/ManipulateData/dataService.jsp" />
+    </definition>
+
+    <definition name="editContract" extends="base.definition">
+        <put-attribute name="title" value="BlueSoft Recruitment App" />
+        <put-attribute name="body" value="/WEB-INF/views/pages/ManipulateData/editContract.jsp" />
+        <put-attribute name="menu" value="/WEB-INF/views/pages/ManipulateData/dataService.jsp" />
+    </definition>
+
+    <definition name="about" extends="base.definition">
+        <put-attribute name="title" value="BlueSoft Recruitment App" />
+        <put-attribute name="body" value="/WEB-INF/views/pages/about.jsp" />
+    </definition>
+
+    <definition name="addNewContractForm" extends="base.definition">
+        <put-attribute name="title" value="BlueSoft Recruitment App" />
+        <put-attribute name="body" value="/WEB-INF/views/pages/ManipulateData/addNewContractForm.jsp" />
+        <put-attribute name="menu" value="/WEB-INF/views/pages/ManipulateData/dataService.jsp" />
+    </definition>
+
+    <definition name="addNewSystemForm" extends="base.definition">
+        <put-attribute name="title" value="BlueSoft Recruitment App" />
+        <put-attribute name="body" value="/WEB-INF/views/pages/ManipulateData/addNewSystemForm.jsp" />
+        <put-attribute name="menu" value="/WEB-INF/views/pages/ManipulateData/dataService.jsp" />
+    </definition>
+
+</tiles-definitions>
