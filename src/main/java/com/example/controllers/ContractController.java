@@ -53,59 +53,67 @@ public class ContractController {
     }
 
     @RequestMapping(value = "/addContract", method = RequestMethod.POST)
-    public String addContract(  @RequestParam("contractNumber") String number,
-                                @RequestParam("startDate") @DateTimeFormat(pattern = "yyyy-mm-dd") Date startDate,
-                                @RequestParam("endDate") @DateTimeFormat(pattern = "yyyy-mm-dd") Date endDate,
-                                @RequestParam(name ="settlement") String settlement,
-                                @RequestParam(name ="payment") double payment,
-                                @RequestParam(name ="systemName") String systemName,
-                                Model model,
-                                RedirectAttributes redirectAttr) {
+    public String addContract(@RequestParam("contractNumber") String number,
+                              @RequestParam("startDate") @DateTimeFormat(pattern = "yyyy-mm-dd") Date startDate,
+                              @RequestParam("endDate") @DateTimeFormat(pattern = "yyyy-mm-dd") Date endDate,
+                              @RequestParam(name = "settlement") String settlement,
+                              @RequestParam(name = "payment") double payment,
+                              @RequestParam(name = "systemName") String systemName,
+                              Model model,
+                              RedirectAttributes redirectAttr) {
 
+        String contractMessage;
         System systemToAssignContract = systemRepository.findByName(systemName);
-        if(systemToAssignContract != null && systemToAssignContract.getContract() == null){
+        if (systemToAssignContract != null && systemToAssignContract.getContract() == null) {
             Contract contractToAdd = new Contract(number, startDate, endDate, Settlement.valueOf(settlement.toUpperCase()), payment, true);
             contractToAdd.setSystem(systemToAssignContract);
             contractRepository.save(contractToAdd);
-            redirectAttr.addFlashAttribute("contractMessage", "Contract added properly!");
-        }else{
-            redirectAttr.addFlashAttribute("contractMessage", "This system does not exist or it has already a contract assigned! Try with another one");
+            contractMessage = "Contract added properly!";
+        } else {
+            contractMessage = "This system does not exist or it has already a contract assigned! Try with another one";
         }
-
+        redirectAttr.addFlashAttribute("contractMessage", contractMessage);
         return "redirect:/addNewContractForm";
     }
 
     @RequestMapping(value = "/removeContract", method = RequestMethod.POST)
-    public String removeContract(@RequestParam("number") String number, Model model, RedirectAttributes redirectAttr){
+    public String removeContract(@RequestParam("number") String number, Model model, RedirectAttributes redirectAttr) {
 
+        String removeContractMessage;
         Contract contractToRemove = contractRepository.findByNumber(number);
-        if (contractToRemove != null){
+        if (contractToRemove != null) {
             contractToRemove.setStatus(false);
             contractRepository.save(contractToRemove);
-            redirectAttr.addFlashAttribute("removeContractMessage","Contract deactivated properly!");
+            removeContractMessage = "Contract deactivated properly!";
+        } else {
+            removeContractMessage = "There is no contract with such a name in database!";
         }
-        else{
-            redirectAttr.addFlashAttribute("removeContractMessage","There is no Contract with such name in database");
-        }
+        redirectAttr.addFlashAttribute("removeContractMessage", removeContractMessage);
         return "redirect:/removeContractForm";
     }
 
-    @RequestMapping(value = "/editContracts", method = RequestMethod.POST)
-    public String editContract(@RequestParam("id") Long id, Model model){
+    @RequestMapping(value = "/editContract", method = RequestMethod.POST)
+    public String editContract(@RequestParam("contractNumber") String number,
+                               @RequestParam("startDate") @DateTimeFormat(pattern = "yyyy-mm-dd") Date startDate,
+                               @RequestParam("endDate") @DateTimeFormat(pattern = "yyyy-mm-dd") Date endDate,
+                               @RequestParam(name = "settlement") String settlement,
+                               @RequestParam(name = "payment") double payment,
+                               Model model,
+                               RedirectAttributes redirectAttr) {
 
-        Contract contractToRemove = isPresentById(id);
-        if (contractToRemove != null){
-            contractToRemove.setStatus(false);
-            contractRepository.save(contractToRemove);
-            return "redirect:/dataService";
+        String editContractMessage;
+        Contract contractToEdit = contractRepository.findByNumber(number);
+        if (contractToEdit != null) {
+            contractToEdit.setStartDate(startDate);
+            contractToEdit.setEndDate(endDate);
+            contractToEdit.setSettlement(Settlement.valueOf(settlement.toUpperCase()));
+            contractToEdit.setPayment(payment);
+            contractRepository.save(contractToEdit);
+            editContractMessage = "Contract edited properly!";
+        } else {
+            editContractMessage = "There is no contract with such a name in database!";
         }
-        else{
-            return "redirect:/removeContractForm";
-        }
-    }
-
-    private Contract isPresentById(Long id){
-        return contractRepository.findById(id)
-                .orElse(null);
+        redirectAttr.addFlashAttribute("editContractMessage", editContractMessage);
+        return "redirect:/editContract";
     }
 }

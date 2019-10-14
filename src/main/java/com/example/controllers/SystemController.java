@@ -40,13 +40,15 @@ public class SystemController {
                                 Model model,
                                 RedirectAttributes redirectAttr) {
 
+        String systemMessage;
         if(systemRepository.findByName(name) == null){
             System systemToAdd = new System(name, description, technologies);
             systemRepository.save(systemToAdd);
-            redirectAttr.addFlashAttribute("SystemMessage", "System added properly!");
+            systemMessage = "System added properly!";
         }else{
-            redirectAttr.addFlashAttribute("SystemMessage", "System name already exist! Try again");
+            systemMessage = "System name already exist! Try again";
         }
+        redirectAttr.addFlashAttribute("SystemMessage", systemMessage);
         return "redirect:/addNewSystemForm";
     }
 }

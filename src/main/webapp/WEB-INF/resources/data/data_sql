@@ -1,0 +1,41 @@
+
+
+INSERT INTO client (id, nip,address,company_name)
+VALUES (1, 'PL1234567','Katowice, stawowa 1','Financial company'),
+(2, 'PL2345678','Gliwice, Pszczyńska 2','Eshop'),
+(3, 'PL3456789','Bytom, kolorowa 3','Insurance Company'),
+(4, 'PL4567890','Pszczyna, zimowa 4','XX Bank'),
+(5, 'PL1113344','Tychy, Sobieskiego 5','YY Bank'),
+(6, 'PL3546578','Rybnik, Chrobrego 6','Sport Eshop'),
+(7, 'PL2220001','Wrocław, Wąska 6','Apteka'),
+(8, 'PL1029384','Racibórz, Długa 7','ZZ Bank'),
+(10, 'PL1938576','Racibórz, Kwiatowa 7','TT Bank'),
+(11, 'PL2224445','Rybnik, Niebieska 7','YY Bank'),
+(12, 'PL3336668','Wodzisław, Czerwona 7','RR Bank'),
+(13, 'PL0009991','Tarnowskie Góry, Zielona 7','WW Bank'),
+(14, 'PL1470921','Opole, Wybickiego 7','EE Bank'),
+(15, 'PL2874012','Bielsko-Biała, Kościuszki 7','AA Bank'),
+(16, 'PL5559988','Ruda Śląska, Sobieskiego 7','BB Bank');
+
+
+INSERT INTO system ( description,name,technologies,client_id)
+VALUES ('Financial Company','Financial company','Java, Vaadin',1),
+('Eshop system','Eshop','C#, .NET',2),
+('Insurance system','Insurance system','JavaScript, Spring',3),
+('XX Bank system','XX Bank system','Node.js',4),
+('YY Bank system','YY Bank system','Python, Django',5),
+('Sport system','Sport system','JavaScript, Spring',6),
+('ZZ Bank system','ZZ Bank system','C#, .NET',7),
+('TT Bank system','TT Bank system','Java, Vaadin',8);
+
+INSERT INTO contract (number, end_date,payment,settlement, start_date,status,system_id)
+Values ('456/2020', '2020-10-11', 500000, 'MONTHLY', '2016-10-11', TRUE,'Financial company'),
+('457/2021', '2021-10-11', 700000, 'ANNUAL', '2015-10-16', TRUE,'Eshop'),
+('458/2018', '2018-10-11', 800000, 'QUARTERLY', '2017-11-15', FALSE,'Insurance system'),
+('459/2021', '2021-10-11', 900000, 'ANNUAL', '2016-12-14', TRUE,'XX Bank system'),
+('460/2019', '2019-10-11', 100000, 'QUARTERLY', '2018-03-13', FALSE,'YY Bank system'),
+('461/2021', '2021-10-11', 200000, 'MONTHLY', '2015-05-12', TRUE,'Sport system'),
+('462/2017', '2017-10-11', 2200000, 'ANNUAL', '2013-05-12', FALSE,'ZZ Bank system');
+
+
+

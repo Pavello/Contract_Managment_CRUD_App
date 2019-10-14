@@ -12,9 +12,6 @@ import org.springframework.web.servlet.view.tiles3.TilesViewResolver;
 @EnableWebMvc
 public class WebConfig implements WebMvcConfigurer {
 
-
-
-
     @Bean
     public TilesConfigurer tilesConfigurer(){
         TilesConfigurer tilesConfigurer = new TilesConfigurer();
@@ -22,7 +19,6 @@ public class WebConfig implements WebMvcConfigurer {
         tilesConfigurer.setCheckRefresh(true);
         return tilesConfigurer;
     }
-
 
     @Override
     public void configureViewResolvers(ViewResolverRegistry registry) {
@@ -36,4 +32,5 @@ public class WebConfig implements WebMvcConfigurer {
                 .addResourceHandler("/resources/**")
                 .addResourceLocations("WEB-INF/resources/");
     }
+
 }
