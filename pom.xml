@@ -24,7 +24,7 @@
     <failOnMissingWebXml>false</failOnMissingWebXml>
     <servlet.version>3.1.0</servlet.version>
     <apachetiles.version>3.0.5</apachetiles.version>
-    <spring-data.version>2.0.7.RELEASE</spring-data.version>
+    <spring-data.version>2.1.0.RELEASE</spring-data.version>
     <dbcp.version>2.3.0</dbcp.version>
   </properties>
 
